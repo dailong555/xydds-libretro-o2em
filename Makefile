@@ -270,6 +270,18 @@ else ifeq ($(platform), miyoo)
    FLAGS += -DDINGUX
    fpic := -fPIC
 
+# XYDDS
+else ifeq ($(platform), xydds)
+	TARGET := $(TARGET_NAME)_libretro.so
+	CC = /opt/xydds/usr/bin/arm-linux-gcc
+	CXX = /opt/xydds/usr/bin/arm-linux-g++
+	AR = /opt/xydds/usr/bin/arm-linux-ar
+   SHARED := -shared -Wl,--no-undefined -Wl,--version-script=link.T
+   FLAGS += -fomit-frame-pointer -marm -mfpu=neon-vfpv4 -mfloat-abi=hard
+   FLAGS += -DARM -mcpu=cortex-a7
+   FLAGS += -DDINGUX
+   fpic := -fPIC
+
 # RETROFW
 else ifeq ($(platform), retrofw)
    TARGET := $(TARGET_NAME)_libretro.so
